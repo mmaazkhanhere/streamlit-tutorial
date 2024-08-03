@@ -1,26 +1,25 @@
 import streamlit as st
 
-st.title("Hello world! I am streamlit application")
+st.title('Streamlit application')
+st.header('What makes streamlit special?')
+st.subheader('It is beginner friendly')
 
-st.header("This is header of the application ")
+st.text('I am learning streamlit to build AI powered applications')
+st.markdown('I am learning streamlit to build AI powered applications') # everything written is a markdown\
 
-st.subheader("This is a subheader of the application")
+st.latex(r"\begin{pmatrix}a&b\\c&d\end{pmatrix}") #this is regex text
 
-st.text("This is simple **text** message")
-# bold and italic works only for markdown
+data = {
+    'name': 'John',
+    'age': 25,
+    'city': 'New York'
+}
 
-st.markdown("This is markdown *message* and this is **bold** text")
-# ** wrapped text will be bold and * wrapped text will be italic
-# all markdown style will be applicable like #H1, ##H2 etc.
-st.markdown("# Headings")
+st.json(data)
 
-st.latex(r"\begin{pmatrix}a&b\\c&d\end{pmatrix}")
+code = '''
+def hello():
+    print("Hello, World!")
+'''
 
-jsonFile = {"a": "1, 2, 3", "b": "4, 5, 6"}
-st.json(jsonFile)
-
-code = """
-print("Hello world!")
-"""
-
-st.code(code)
+st.code(code, language='python')

@@ -1,29 +1,24 @@
 import streamlit as st
 
-st.write("#Media Widgets")
-st.markdown("### Image File")
-st.image("image.png", caption="This an image I added", width=500)
+st.title("Welcome to Streamlit Tutorial")
+st.header('Media Widgets')
+st.image('image.png', caption='This is a certification image', width=500)
+
 st.audio("audio.mp3")
 
 
-def change():
-    print(st.session_state.checker)
+# def change():
+#     print(st.session_state.checker)
 
-
-state = st.checkbox("Followed", key="checker", on_change=change)
-# the state of the checkbox is displayed in the terminal
+st.write('Page followed?')
+st.checkbox("Followed")
 
 radio_bts = st.radio(
-    "In which country do you live?", options=("USA", "Australia", "Pakistan")
+    'Select the country you live in.', options = ("USA", "Australia", "Pakistan", "India")
 )
-print(radio_bts)
 
+btn = st.button("Subscribe")
 
-def btn_click():
-    print("Button click")
-
-
-btn = st.button("Subscribe", on_click=btn_click)
 
 select = st.selectbox(
     "What is your favorite programming languages",
@@ -31,19 +26,21 @@ select = st.selectbox(
 )
 
 multi_select = st.multiselect(
-    "What is your favorite colors", options=("Red", "Green", "Blue")
+    "In which languages do you have proficiency?", options=("Python", "JavaScript", "Typescript", "GO", "Ruby", "Rust"), default=("Typescript")
 )
 
-slider = st.slider("How much you like streamlit?", max_value=10)
+slider = st.slider("How much do you like streamlit", max_value=10)
 
-slt_slider = st.select_slider(
-    "How much you like streamlit", options=("Not much", "Okay", "Quite good")
-)
+slt_slider = st.select_slider("How much you like streamlit", options=('Not much', 'Okay', 'Very much'))
 
-name = st.text_input("Enter your name", max_chars=60)
-if name is not None:
+
+name = st.text_input("Enter your name", max_chars=40)
+if len(name) > 0:
     st.text(f"Welcome to streamlit {name}")
 
-text_area = st.text_area("Enter your programming experience", max_chars=200)
+# text_area = st.text_area("Enter your programming experience", max_chars=200)
+
+text_area = st.text_area("Enter your programming experience", placeholder="I started my programming when ...")
+
 date = st.date_input("Enter date")
 time = st.time_input("Enter time")
