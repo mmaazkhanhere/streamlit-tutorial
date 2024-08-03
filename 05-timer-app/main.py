@@ -2,36 +2,35 @@ import streamlit as st
 import time as ts
 from datetime import time
 
-st.title("Countdown App")
-time_value = st.time_input("Set Timer", value=time(0, 0, 0))  # initial value is 0
 
-def convertor(time_str: str):
+st.title('Countdown App')
+time_value = st.time_input('Enter the time', value=time(0, 0, 0))
+
+def convertor(time_value: str):
     """
-    A fuction that takes time in HH:MM:SS format and converts it to total seconds
+        A function that takes a time string and returns the total time in seconds
     """
-    h, m, s = time_str.split(":")
-    total_seconds = int(h) * 3600 + int(m) * 60 + int(s)
+    hour, minute, seconds = time_value.split(":")
+    total_seconds = int(hour) * 3600 + int(minute) * 60 + int(seconds)  
     return total_seconds
 
-if str(time_value) == "00:00:00":
-    st.write("Please set timer")  # ask user to set timer
+if time_value == '00:00:00':
+    st.write("Please set the timer")
 else:
-    seconds = convertor(str(time_value))  # converts the time into seconds
-
-    bar = st.progress(0) # progress bar
-    progress = st.empty() # the progress bar is set to 0
-    countdown_text = st.empty() # the countdown text is set to empty
+    seconds = convertor(str(time_value))
+    bar = st.progress(0)
+    progress = st.empty()
+    count_down_text = st.empty()
 
     for i in range(seconds, 0, -1):
-        # loop from total seconds to 0 with step -1
-        minutes, secs = divmod(i, 60) #divmod returns quotient and reminder
-        hours, minutes = divmod(minutes, 60)
-        
-        countdown_text.text(f"Time remaining: {hours:02}:{minutes:02}:{secs:02}")
+        minutes, secs = divmod(i, 60)
+        hour, minutes = divmod(minutes, 60)
+
+        count_down_text.text(f"{hour:02d}:{minutes:02d}:{secs:02d}")
         bar.progress((seconds - i) / seconds)
-        progress.text(f"{((seconds - i) / seconds) * 100:.2f}%")
+        progress.text(f"{(seconds - i) / seconds * 100:.2f}%")
         ts.sleep(1)
 
-    countdown_text.text("Time's up!")
-    progress.text("100%")
-    bar.progress(1.0)
+count_down_text.text('Time is up')
+progress.text('100%')
+bar.progress(1.0)
